@@ -351,16 +351,222 @@ footer a:hover { color: var(--text); }
 <script>
 // ─── DICTIONNAIRES ────────────────────────────────────────────────────────────
 const CASE_LABELS = {
-  '1AJ':'Salaires — Déclarant 1','1BJ':'Salaires — Déclarant 2',
-  '1CJ':'Salaires — 1ʳᵉ personne à charge','1DJ':'Salaires — 2ᵉ personne à charge',
-  '1AK':'Frais réels — Déclarant 1','1BK':'Frais réels — Déclarant 2',
-  '2DC':'Revenus des actions et parts (dividendes)','2TR':'Intérêts et revenus assimilés',
-  '4BA':'Revenus fonciers — régime réel','4BE':'Revenus fonciers — micro-foncier','6DE':'CSG déductible',
-  '7UD':"Dons — organismes d'aide aux personnes en difficulté",'7UF':"Dons — autres organismes d'intérêt général"
+'1AJ':'Salaires — Déclarant 1',
+'1AK':'Frais réels — Déclarant 1',
+'1AP':'Pensions de retraite — Déclarant 1',
+'1AS':'Allocations chômage — Déclarant 1',
+'1BJ':'Salaires — Déclarant 2',
+'1BK':'Frais réels — Déclarant 2',
+'1BP':'Pensions de retraite — Déclarant 2',
+'1BS':'Allocations chômage — Déclarant 2',
+'1CJ':'Salaires — Personne à charge 1',
+'1DJ':'Salaires — Personne à charge 2',
+'1TT':'Heures supplémentaires exonérées',
+'1UT':'Heures supplémentaires exonérées conjoint',
+'2BH':'Revenus déjà soumis prélèvement forfaitaire',
+'2CK':'Prélèvement non libératoire déjà payé',
+'2DC':'Revenus des actions et parts (dividendes)',
+'2FU':'Revenus éligibles abattement',
+'2GO':"Crédits d'impôt étrangers", // Corrigé
+'2OP':'Option barème progressif IR',
+'2TR':'Intérêts et produits de placement',
+'2TS':'Autres revenus de capitaux mobiliers',
+'3SJ':'Plus-values immobilières imposables',
+'3TK':'Plus-values professionnelle court terme',
+'3TN':'Plus-values professionnelle long terme',
+'3VG':'Plus-values de cession valeurs mobilières',
+'3VH':'Moins-values de cession',
+'4BA':'Revenus fonciers régime réel',
+'4BB':'Déficit foncier imputable',
+'4BC':'Déficit foncier reportable',
+'4BD':'Déficit foncier antérieur',
+'4BE':'Revenus fonciers micro-foncier',
+'5HQ':'Revenus micro-BIC',
+'5HY':'Locations meublées non pro',
+'5IQ':'Revenus micro-BIC conjoint',
+'5IZ':'Locations meublées non pro conjoint',
+'5NC':'Revenus industriels et commerciaux pro',
+'5ND':'Déficit BIC pro',
+'5NE':'Revenus BIC non professionnels',
+'5NF':'Déficit BIC non pro',
+'6DD':'Pensions alimentaires versées',
+'6DE':'CSG déductible',
+'6DF':'Pensions alimentaires perçues',
+'6EL':'Charges déductibles diverses',
+'6EU':'Dépenses accueil personnes âgées',
+'6GU':'Versements épargne retraite PER',
+'6RS':'Cotisations retraite supplémentaires',
+'6SS':'Plafond épargne retraite',
+'7UD':"Dons organismes aide personnes difficulté (01/01-13/10)",
+'7UQ':"Dons organismes aide personnes difficulté (14/10-31/12)", 
+'7AA':'Location convention ANAH non résident',
+ '7AC':'Cotisations syndicales déclarant',
+ '7AE':'Cotisations syndicales conjoint',
+ '7AG':'Cotisations syndicales personne charge',
+ '7BK':'Loc Avantages intermédiaire sans intermédiation',
+ '7BL':'Loc Avantages intermédiaire avec intermédiation',
+ '7BM':'Loc Avantages social sans intermédiation',
+ '7BN':'Loc Avantages social avec intermédiation',
+ '7BO':'Loc Avantages très social',
+ '7BS':'Report SFS 2021',
+ '7BT':'Report SFS 2022',
+ '7BU':'Report SFS 2023',
+ '7BW':'Report SFS 2024',
+ '7CA':'Report PME 2021',
+ '7CD':'EHPAD ou dépendance 1',
+ '7CE':'EHPAD ou dépendance 2',
+ '7CI':'Souscription PME',
+ '7CO':'Souscription ESUS',
+ '7CP':'Report PME ESUS début 2023',
+ '7CQ':'Report PME ESUS fin 2023',
+ '7CR':'Souscription JEI',
+ '7CT':'Report PME ESUS 2021',
+ '7CU':'Report PME ESUS début 2022',
+ '7CV':'Report PME 2024',
+ '7CW':'Report PME ESUS fin 2022',
+ '7CY':'Report global 2020',
+ '7DB':'Dépenses services à la personne',
+ '7DC':'Report ESUS 2021',
+ '7DG':'Carte invalidité ou CMI',
+ '7DL':'Nombre ascendants APA',
+ '7DO':'Report ESUS début 2024',
+ '7DP':'Report ESUS fin 2024',
+ '7DQ':'Premier emploi salarié domicile',
+ '7DR':'Aides perçues services à la personne',
+ '7DY':'Report global 2021',
+ '7DZ':'Souscription JEIR',
+ '7EA':'Frais scolarité collège',
+ '7EB':'Frais scolarité collège résidence alternée',
+ '7EC':'Frais scolarité lycée',
+ '7ED':'Frais scolarité lycée résidence alternée',
+ '7EF':'Frais scolarité supérieur',
+ '7EG':'Frais scolarité supérieur résidence alternée',
+ '7EK':'Report plafonnement global',
+ '7EN':'SOFICA 48',
+ '7EY':'Report global 2022',
+ '7FH':'Intérêts emprunt reprise entreprise',
+ '7FL':'FIP outre mer',
+ '7FM':'FIP Corse',
+ '7FN':'SOFICA 30',
+ '7FY':'Report global 2023',
+ '7GA':'Frais garde enfant <6 ans 1',
+ '7GB':'Frais garde enfant <6 ans 2',
+ '7GC':'Frais garde enfant <6 ans 3',
+ '7GE':'Frais garde résidence alternée 1',
+ '7GF':'Frais garde résidence alternée 2',
+ '7GG':'Frais garde résidence alternée 3',
+ '7GN':'SOFICA 36',
+ '7GQ':'FCPI versement début année',
+ '7GR':'FCPI versement fin année',
+ '7GW':'Souscription SFS',
+ '7GY':'Report global 2024',
+ '7GZ':'Rente survie épargne handicap',
+ '7JN':'Report Pinel 2020 metro 6 ans',
+ '7JO':'Report Pinel 2020 metro 9 ans',
+ '7JP':'Report Pinel 2020 OM 6 ans',
+ '7JQ':'Report Pinel 2020 OM 9 ans',
+ '7KM':'Report Pinel 2019 metro',
+ '7MM':'Report Pinel 2019 OM',
+ '7MX':'Souscription presse 30',
+ '7MY':'Souscription presse 50',
+ '7NZ':'Objets monuments historiques',
+ '7QM':'Pinel metro 2022 6 ans',
+ '7QN':'Pinel metro 2022 9 ans',
+ '7QO':'Pinel OM 2022 6 ans',
+ '7QP':'Pinel OM 2022 9 ans',
+ '7QR':'Pinel metro 2023 report 6 ans',
+ '7QS':'Pinel metro 2023 report 9 ans',
+ '7QT':'Pinel OM 2023 report 6 ans',
+ '7QU':'Pinel OM 2023 report 9 ans',
+ '7RB':'Report Pinel 2017 metro',
+ '7RD':'Report Pinel 2017 OM',
+ '7RF':'Report Pinel 2018 metro',
+ '7RH':'Report Pinel 2018 OM',
+ '7SD':'Pinel metro 2024 6 ans',
+ '7SE':'Pinel metro 2024 9 ans',
+ '7SF':'Pinel OM 2024 6 ans',
+ '7SG':'Pinel OM 2024 9 ans',
+ '7TX':'Malraux zone PSMV ou ANRU',
+ '7TY':'Malraux autres zones',
+ '7UC':'Cotisations forêt',
+ '7UF':'Dons organismes intérêt général',
+ '7UH':'Dons partis politiques',
+ '7UJ':'Dons sauvegarde patrimoine religieux',
+ '7UL':'Investissement forestier assurance',
+ '7UN':'Investissement forestier acquisition',
+ '7UO':'Dons exceptionnels Mayotte',
+ '7UP':'Investissement forestier travaux',
+ '7US':'Réduction mécénat entreprise',
+ '7UT':'Investissement forestier sinistre',
+ '7VA':'Dons UE aide difficulté avant 14 10',
+ '7VC':'Dons UE intérêt général',
+ '7VD':'Pinel metro 2023 6 ans',
+ '7VE':'Pinel metro 2023 9 ans',
+ '7VF':'Pinel OM 2023 6 ans',
+ '7VG':'Pinel OM 2023 9 ans',
+ '7VM':'Dons UE aide difficulté après 14 10',
+ '7VW':'Pinel+ metro 6 ans',
+ '7VX':'Pinel+ metro 9 ans',
+ '7VY':'Pinel+ outre mer 6 ans',
+ '7VZ':'Pinel+ outre mer 9 ans',
+ '7WI':'Travaux adaptation logement handicap',
+ '7WL':'Travaux prévention risques technologiques',
+ '7WM':'Prestation compensatoire substitution rente',
+ '7WN':'Prestation compensatoire versée',
+ '7WO':'Prestation compensatoire capital',
+ '7WP':'Report prestation compensatoire',
+ '7WR':'Travaux prévention risques technologiques',
+ '7XS':'Report dons 2020',
+ '7XT':'Report dons 2021',
+ '7XU':'Report dons 2022',
+ '7XW':'Report dons 2023',
+ '7XY':'Report dons 2024',
+ '7ZQ':'Recharge VE RP 1',
+ '7ZR':'Recharge VE RP 2',
+ '7ZS':'Recharge VE RS 1',
+ '7ZT':'Recharge VE RS 2',
+ '8CV':'Crédit industrie verte',
+ '8PY':'Report PTZ',
+ '8PZ':'PTZ mobilité',
+ '8TB':'Crédit recherche restitution immédiate',
+ '8TC':'Crédit recherche classique',
+ '8TG':'Crédit Corse normal',
+ '8TL':'CICE restitution',
+ '8TO':'Report crédit impôt',
+ '8TP':'Reprise crédit impôt',
+ '8TS':'Crédit Corse restitution',
+ '8UW':'CICE classique',
+ '8WK':'Crédit collaboration recherche',
+
+'2AB':'Crédit d\'impôt sur revenus de capitaux mobiliers étrangers avec intermédiaire français',
+
+'Avance_RICI_Foyer':'Avance de 60% des réductions et crédits d\'impôt perçue par le foyer fiscal',
+'Acompte_RICI_Dec1':'Acompte de réductions et crédits d\'impôt versé en janvier - déclarant 1',
+'Acompte_RICI_Dec2':'Acompte de réductions et crédits d\'impôt versé en janvier - déclarant 2',
+
+'8HV':'Prélèvement à la source retenu sur salaires ou pensions - déclarant 1',
+'8HW':'Acomptes d\'impôt sur le revenu prélevés à la source - déclarant 1',
+'8IW':'Acomptes d\'impôt sur le revenu prélevés à la source - déclarant 2',
+'8HX':'Acomptes de prélèvements sociaux prélevés à la source - déclarant 1',
+'8IX':'Acomptes de prélèvements sociaux prélevés à la source - déclarant 2',
+'6PS':'Epargne retraite, plafond de déduction - déclarant 1',
+'6PST':'Epargne retraite, plafond de déduction - déclarant 2',
+'APS':'Plafond de détail 2025 - déclarant 1',
+'APT':'Plafond de détail 2025 - déclarant 2',
+'BPS':'Plafond non utilisé en 2023 - déclarant 1',
+'BPT':'Plafond non utilisé en 2023 - déclarant 2',
+'CPS':'Plafond non utilisé en 2024 - déclarant 1',
+'CPT':'Plafond non utilisé en 2024 - déclarant 2',
+'DPS':'Plafond non utilisé en 2025 - déclarant 1',
+'DPT':'Plafond non utilisé en 2025 - déclarant 2'
 };
+
 const SITUATION_FAMILIALE = {
   'M':'M = Marié(e)','C':'C = Célibataire','D':'D = Divorcé(e)','V':'V = Veuf(ve)','O':'O = Pacsé(e)'
 };
+
+// Fonction delay déclarée au début pour éviter tout problème d'exécution synchrone
+function delay(ms){return new Promise(r=>setTimeout(r,ms))}
 
 // ─── HELPERS DE RENDU ─────────────────────────────────────────────────────────
 function toInt(val){
@@ -375,10 +581,7 @@ function titleCase(s){ if(!s)return ''; return s.split(' ').map(w=>cap(w)).join(
 
 // ─── FONCTION DE STYLISATION COMMUNE (EXCELJS) ───────────────────────────────
 function applyModernLayout(sheet, titleText, headers, columnsConfig) {
-  // 1. Configurer la largeur et les clés de colonnes
   sheet.columns = columnsConfig;
-  
-  // 2. Ligne 1 : Grand Titre Graphique (Blanc sur fond Marron Sienne #8B4A2B)
   sheet.insertRow(1, [titleText]);
   const endColLetter = String.fromCharCode(64 + columnsConfig.length); 
   sheet.mergeCells(`A1:${endColLetter}1`);
@@ -387,17 +590,16 @@ function applyModernLayout(sheet, titleText, headers, columnsConfig) {
   row1.height = 38;
   const titleCell = row1.getCell(1);
   titleCell.font = { name: 'Arial', size: 13, bold: true, color: { argb: 'FFFFFFFF' } };
-  titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF8B4A2B' } }; // Couleur Accent #8B4A2B
+  titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF8B4A2B' } }; 
   titleCell.alignment = { vertical: 'middle', horizontal: 'center' };
 
-  // 3. Ligne 2 : En-têtes de colonnes (Anthracite sur fond Beige Clair #E2DDD6)
   sheet.getRow(2).values = headers;
   const row2 = sheet.getRow(2);
   row2.height = 26;
   
   row2.eachCell((cell) => {
-    cell.font = { name: 'Arial', size: 10, bold: true, color: { argb: 'FF1A1814' } }; // Texte #1A1814
-    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2DDD6' } }; // Fond secondaire #E2DDD6
+    cell.font = { name: 'Arial', size: 10, bold: true, color: { argb: 'FF1A1814' } }; 
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2DDD6' } }; 
     cell.alignment = { vertical: 'middle', horizontal: 'left' };
     cell.border = {
       bottom: { style: 'medium', color: { argb: 'FF7A7060' } },
@@ -406,7 +608,6 @@ function applyModernLayout(sheet, titleText, headers, columnsConfig) {
   });
 }
 
-// Finalise la feuille avec les filtres sur la ligne 2
 function finalizeSheetFilters(sheet, columnsCount) {
   const endColLetter = String.fromCharCode(64 + columnsCount);
   sheet.autoFilter = {
@@ -614,10 +815,8 @@ btnGenerate.addEventListener('click', async ()=>{
     setProgress(40,'Initialisation du moteur de style ExcelJS...');
     await delay(60);
 
-    // Initialisation du classeur via ExcelJS
     const workbook = new ExcelJS.Workbook();
     
-    // Génération des onglets stylisés
     buildDeclarantsSheet(workbook, data);
     buildCodesSheet(workbook, data);
     buildBulletinsSheet(workbook, data);
@@ -630,7 +829,6 @@ btnGenerate.addEventListener('click', async ()=>{
     const buffer = await workbook.xlsx.writeBuffer();
     const excelBlob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-    // Sauvegarde via API moderne ou Téléchargement classique alternatif
     if(window.showSaveFilePicker){
       try{
         const handle=await window.showSaveFilePicker({
@@ -654,7 +852,6 @@ btnGenerate.addEventListener('click', async ()=>{
       }
     }
 
-    // Fallback automatique si showSaveFilePicker n'est pas supporté (ex: Firefox)
     const link = document.createElement('a');
     link.href = URL.createObjectURL(excelBlob);
     link.download = outputName;
@@ -672,7 +869,6 @@ btnGenerate.addEventListener('click', async ()=>{
     btnGenerate.disabled=false;
   }
 });
-
 function delay(ms){return new Promise(r=>setTimeout(r,ms))}
 </script>
 </body>
